@@ -20,10 +20,11 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-#gem 'jquery-rails'
+gem 'jquery-rails'
 gem 'angularjs-rails'
-gem 'angular-ui-bootstrap-rails'
-gem 'zurb-foundation'
+#gem 'angular-ui-bootstrap-rails'
+gem 'compass-rails' # you need this or you get an err
+gem 'zurb-foundation', '~> 4.0.0'
 gem 'thin'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

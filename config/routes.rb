@@ -1,4 +1,8 @@
 Spinner::Application.routes.draw do
+  resources :homepages
+
+  root 'homepages#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
