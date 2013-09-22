@@ -1,4 +1,6 @@
 Spinner::Application.routes.draw do
+  resources :foos
+
   resources :homepages
 
   root 'homepages#index'
