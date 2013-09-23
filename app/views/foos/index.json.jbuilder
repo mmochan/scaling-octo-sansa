@@ -1,4 +1,1 @@
-json.array!(@foos) do |foo|
-  json.extract! foo, 
-  json.url foo_url(foo, format: :json)
-end
+json.array! @foos, :first_name, :middle_name, :last_name

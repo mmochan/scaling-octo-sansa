@@ -1,0 +1,1 @@
+json.array! @osb_services, :name, :server, :version, :harvested_at

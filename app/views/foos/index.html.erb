@@ -3,15 +3,18 @@
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>First</th>
+      <th>Middle</th>
+      <th>Last</th>
     </tr>
   </thead>
 
   <tbody>
     <% @foos.each do |foo| %>
       <tr>
+        <td><%=foo.first_name %></td>
+        <td><%=foo.middle_name %></td>
+        <td><%=foo.last_name %></td>
         <td><%= link_to 'Show', foo %></td>
         <td><%= link_to 'Edit', edit_foo_path(foo) %></td>
         <td><%= link_to 'Destroy', foo, method: :delete, data: { confirm: 'Are you sure?' } %></td>

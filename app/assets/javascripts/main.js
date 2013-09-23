@@ -1,10 +1,11 @@
 var app = angular.module('spinner', [] );
 
+
 app.factory('myService', function($http) {
     return {
-        getFoos: function() {
+        getServices: function() {
             //return the promise directly.
-            return $http.get('/foos').then(function(result) {
+            return $http.get('/osb_services.json').then(function(result) {
                     //resolve the promise as the data
                     return result.data;
                 });
@@ -12,17 +13,12 @@ app.factory('myService', function($http) {
     }
 });
 
-module.controller('MyCtrl', function($scope, myService) {
-    //now you can just call it and stick it in a $scope property.
-    //it will update when it resolves.
-    $scope.foos = myService.getFoos();
-});
 
 var controllers = {}
-
-controllers.AppCtrl = function ($scope){
-    $scope.sayHi = function () {
-        alert("Hi")
+controllers.SpinnerCtrl = function ($scope, myService){
+    $scope.osbservices = function () {
+        $scope.myosbs = myService.getServices();
+        return $scope.myosbs;
     }
 }
 

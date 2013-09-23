@@ -1,4 +1,6 @@
 Spinner::Application.routes.draw do
+  resources :osb_services
+
   resources :foos
 
   resources :homepages
