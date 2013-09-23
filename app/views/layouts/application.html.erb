@@ -97,8 +97,13 @@
             <div class="large-10 columns">
               <h2> Count is  {{myosbs.length}} </h2>
             <ul>
+
+              <li ng-repeat="service in myosbs">
                
-                    {{myosbs}}           
+                {{service.name}}
+                {{service.server}}
+                {{service.version}}                
+                {{service.harvested_at}}                                
                </li>
             </ul>
      
