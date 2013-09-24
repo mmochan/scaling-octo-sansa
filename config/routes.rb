@@ -1,4 +1,8 @@
 Spinner::Application.routes.draw do
+  resources :dashboards
+
+  resources :osb_deployment_trackers
+
   resources :osb_services
 
   resources :foos

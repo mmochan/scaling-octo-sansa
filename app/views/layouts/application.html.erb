@@ -55,131 +55,94 @@
 
     <!-- End Header and Nav -->
     <div class="row">
-    
-    <div ng-controller="SpinnerCtrl">        
-
-     <!-- Nav Sidebar -->
-        <!-- This is source ordered to be pulled to the left on larger screens -->
+      <div ng-controller="SpinnerCtrl" ng-cloak>     
         <div class="large-3 columns ">
           <div class="panel">
-            <h5><a href="#">Menu</a></h5>
+            <h5><a>Menu</a></h5>
               <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
               <section class="section">
-                <h5 class="title"><a href="#">Dashboard</a></h5>
+                <h5 class="title" ng-click="poos()"><a>Dashboard</a></h5>
               </section>
               <section class="section">
-                <h5 class="title"><a href="#">Validation</a></h5>
+                <h5 class="title" ng-click="validation()"><a>Validation</a></h5>
               </section>
               <section class="section">
-                <h5 class="title" ng-click="osbservices()"><a href="#">OSB Services</a></h5>
+                <h5 class="title" ng-click="osbservices()"><a>OSB Services</a></h5>
               </section>
               <section class="section">
-                <h5 class="title"><a href="#">Validation Tracker</a></h5>
+                <h5 class="title" ng-click="validationTracker()"><a>Validation Tracker</a></h5>
               </section>
               <section class="section">
-                <h5 class="title"><a href="#">Deployment Tracker</a></h5>
+                <h5 class="title" ng-click="osbtracker()"><a>Deployment Tracker</a></h5>
               </section>
               <section class="section">
-                <h5 class="title"><a href="#">Deployment</a></h5>
+                <h5 class="title"ng-click="deployment()"><a>Deployment</a></h5>
               </section>
             </div>
-     
           </div>
         </div>
 
-        <!-- Main Feed -->
-        <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
-        <div class="large-9 columns">
-     
-          <!-- Feed Entry -->
+        <!-- Main -->
+        <div class="large-9 columns" >
           <div class="row">
-            <div class="large-2 columns small-3"></div>
-            <div class="large-10 columns">
-              <h2> Count is  {{myosbs.length}} </h2>
-            <ul>
+            <div class="large-12 columns">
+              <div ng-show="myosbs" >
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Server</th>
+                        <th>Version</th>
+                        <th>Harvested</th>
+                        <th>Created</th>                    
+                      </tr>
+                  </thead>
+                  <tbody>
+                     <tr ng-repeat="service in myosbs"> 
+                        <td>{{service.name}}</td>
+                        <td>{{service.server}}</td>
+                        <td>{{service.version}}</td>                
+                        <td>{{service.harvested_at}}</td>     
+                        <td>{{service.created_at}}</td>     
+                      <tr>
+                    </tbody>
+                  </table>
+                </div> <!-- ng-hide section -->
 
-              <li ng-repeat="service in myosbs">
-               
-                {{service.name}}
-                {{service.server}}
-                {{service.version}}                
-                {{service.harvested_at}}                                
-               </li>
-            </ul>
-     
+              <div ng-show="tracker" >
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Config</th>
+                        <th>Server</th>
+                        <th>tag</th>
+                        <th>artifacts</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                     <tr ng-repeat="track in tracker"> 
+                        <td>{{track.environment_config}}</td>
+                        <td>{{track.server}}</td>
+                        <td>{{track.tag}}</td>                
+                        <td>{{track.artifacts}}</td>     
+                      <tr>
+                    </tbody>
+                  </table>
+                </div> <!-- ng-hide section -->
+
+                <div ng-show="validation">
+                  <h2>{{valid_message}}</h2>
+                </div>  <!-- ng-hide section -->
+
+                <div ng-show="poos" >
+                  <h2 ng-repeat="poo in poos">{{poo}}</h2>
+                </div>  <!-- ng-hide section -->
             </div>
           </div>
-          <!-- End Feed Entry -->
+      </div> <!-- End main -->
+    </div> <!-- end ng-controller -->
+  </div>  <!-- end row -->
      
-          <hr />
-     
-          <!-- Feed Entry -->
-          <div class="row">
-            <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]" /></div>
-            <div class="large-10 columns">
-              <p><strong>Some Person said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-              <ul class="inline-list">
-                <li><a href="">Reply</a></li>
-                <li><a href="">Share</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- End Feed Entry -->
-     
-          <hr />
-     
-          <!-- Feed Entry -->
-          <div class="row">
-            <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]" /></div>
-            <div class="large-10 columns">
-              <p><strong>Some Person said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-              <ul class="inline-list">
-                <li><a href="">Reply</a></li>
-                <li><a href="">Share</a></li>
-              </ul>
-     
-     
-              <h6>2 Comments</h6>
-              <div class="row">
-                <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]" /></div>
-                <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-              </div>
-            </div>
-          </div>
-          <!-- End Feed Entry -->
-     
-        </div>
-        </div>
-
-     
-      </div>
-     
-     
-      <!-- Footer -->
-     
-      <footer class="row">
-        <div class="large-12 columns">
-          <hr />
-          <div class="row">
-            <div class="large-5 columns">
-              <p>&copy; Copyright no one at all. Go to town.</p>
-            </div>
-            <div class="large-7 columns">
-              <ul class="inline-list right">
-                <li><a href="#">Section 1</a></li>
-                <li><a href="#">Section 2</a></li>
-                <li><a href="#">Section 3</a></li>
-                <li><a href="#">Section 4</a></li>
-                <li><a href="#">Section 5</a></li>
-                <li><a href="#">Section 6</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-    <%= yield %>
-
     
     <%= javascript_include_tag "application" %>
   </body>
