@@ -1,6 +1,6 @@
 class OsbServicesController < ApplicationController
 
     def index
-        @osb_services =OsbService.all.limit(10)
+        @osb_services =OsbService.all
     end
 end

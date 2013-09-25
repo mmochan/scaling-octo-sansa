@@ -21,127 +21,108 @@
     <%= csrf_meta_tags %>
   </head>
 
-    <body class="antialiased off-canvas hide-extras">
-
+  <body class="antialiased off-canvas hide-extras">
+  <div ng-controller="SpinnerCtrl" ng-cloak>     
     <!-- Header and Nav -->
      <nav class="top-bar hide-for-small">
-      <ul class="title-area">
-        <!-- Title Area -->
-        <li class="name">
-          <h1><a href="#"><img src="assets/deployment_framework.png" /></a></h1>
-        </li>
-        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
-
-      <section class="top-bar-section">
-        <!-- Right Nav Section -->
-        <ul class="right">
-          <li class="divider"></li>
-          <li><a href="/grid.php">Reports</a></li>
-          <li class="divider"></li>
-          <li><a href="/templates.php">Audit</a></li>
-          <li class="divider"></li>
-          <li><a href="/case-jacquelinewest.php">Compare</a></li>
-          <li class="divider"></li>
-          <li class="has-form">
-            <a href="http://foundation.zurb.com/docs" class="button">New Deployment</a>
-          </li>
+        <ul class="title-area">
+          <!-- Title Area -->
+          <li class="name" ng-click="dashboard()"><h1><a>Deployment Framework</a></h1></li>        
         </ul>
-      </section>
-    </nav>
 
-
-
+        <section class="top-bar-section">
+              <!-- Right Nav Section -->
+          <ul class="right">
+            <li class="divider"></li>
+            <li class="active has-dropdown"><a>Validation</a>
+              <ul class="dropdown">
+                <li><a>Release</a></li>
+                <li class="divider"></li>
+                <li><a>Runtime</a></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li ng-click="osbservices()"><a>OSB Services</a></li>
+            <li class="divider"></li>
+            <li ng-click="validationTracker()"><a>Validation Tracker</a></li>
+            <li class="divider"></li>
+            <li ng-click="osbtracker()"><a>Deployment Tracker</a></li>
+            <li class="divider"></li>
+            <li ng-click="deployment()"><a>Deployment</a></li>
+          </ul>
+        </section>
+      </nav>
     <!-- End Header and Nav -->
-    <div class="row">
-      <div ng-controller="SpinnerCtrl" ng-cloak>     
-        <div class="large-3 columns ">
-          <div class="panel">
-            <h5><a>Menu</a></h5>
-              <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
-              <section class="section">
-                <h5 class="title" ng-click="poos()"><a>Dashboard</a></h5>
-              </section>
-              <section class="section">
-                <h5 class="title" ng-click="validation()"><a>Validation</a></h5>
-              </section>
-              <section class="section">
-                <h5 class="title" ng-click="osbservices()"><a>OSB Services</a></h5>
-              </section>
-              <section class="section">
-                <h5 class="title" ng-click="validationTracker()"><a>Validation Tracker</a></h5>
-              </section>
-              <section class="section">
-                <h5 class="title" ng-click="osbtracker()"><a>Deployment Tracker</a></h5>
-              </section>
-              <section class="section">
-                <h5 class="title"ng-click="deployment()"><a>Deployment</a></h5>
-              </section>
-            </div>
-          </div>
-        </div>
 
         <!-- Main -->
-        <div class="large-9 columns" >
-          <div class="row">
-            <div class="large-12 columns">
-              <div ng-show="myosbs" >
-                <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Server</th>
-                        <th>Version</th>
-                        <th>Harvested</th>
-                        <th>Created</th>                    
-                      </tr>
-                  </thead>
-                  <tbody>
-                     <tr ng-repeat="service in myosbs"> 
-                        <td>{{service.name}}</td>
-                        <td>{{service.server}}</td>
-                        <td>{{service.version}}</td>                
-                        <td>{{service.harvested_at}}</td>     
-                        <td>{{service.created_at}}</td>     
-                      <tr>
-                    </tbody>
-                  </table>
-                </div> <!-- ng-hide section -->
+        
+          <div class="large-9 columns" >
+            <div class="row">
+              <div class="large-12 columns">
+                <div ng-show="myosbs" >
+                  <div class='panel  radius'>
+                    <h1>OSB Services</h1>
+                   </div> 
+                  <div class='panel radius'>
+                    
+                    <table ng-table="tableParams" class="table">
+                        <thead>
+                          <tr>
+                            <th width="200">Name</th>
+                            <th width="200">Server</th>
+                            <th width="200">Version</th>
+                            <th width="200">Harvested</th>
+                            <th width="200">Created</th>                    
+                          </tr>
+                      </thead>
+                      <tbody>
+                         <tr ng-repeat="service in myosbs">
+                            <td>{{service.name}}</td>
+                            <td>{{service.server}}</td>
+                            <td>{{service.version}}</td>                
+                            <td>{{service.harvested_at}}</td>     
+                            <td>{{service.created_at}}</td>     
+                          <tr>
+                        </tbody>
+                      </table>
+                    </div> <!-- End Panel -->
+                  </div> <!-- ng-hide section -->
 
-              <div ng-show="tracker" >
-                <table>
-                    <thead>
-                      <tr>
-                        <th>Config</th>
-                        <th>Server</th>
-                        <th>tag</th>
-                        <th>artifacts</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                     <tr ng-repeat="track in tracker"> 
-                        <td>{{track.environment_config}}</td>
-                        <td>{{track.server}}</td>
-                        <td>{{track.tag}}</td>                
-                        <td>{{track.artifacts}}</td>     
-                      <tr>
-                    </tbody>
-                  </table>
-                </div> <!-- ng-hide section -->
+                <div ng-show="tracker" >
+                  <h1>Deployment Tracker</h1>
+                  <table>
+                      <thead>
+                        <tr>
+                          <th width="200">Config</th>
+                          <th width="200">Server</th>
+                          <th width="200">tag</th>
+                          <th width="200">artifacts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <tr ng-repeat="track in tracker"> 
+                          <td>{{track.environment_config}}</td>
+                          <td>{{track.server}}</td>
+                          <td>{{track.tag}}</td>                
+                          <td>{{track.artifacts}}</td>     
+                        <tr>
+                      </tbody>
+                    </table>
+                  </div> <!-- ng-hide section -->
 
-                <div ng-show="validation">
-                  <h2>{{valid_message}}</h2>
-                </div>  <!-- ng-hide section -->
+                  <div ng-show="validation">
+                    <h2>{{valid_message}}</h2>
+                  </div>  <!-- ng-hide section -->
 
-                <div ng-show="poos" >
-                  <h2 ng-repeat="poo in poos">{{poo}}</h2>
-                </div>  <!-- ng-hide section -->
+                  <div ng-show="dash" >
+                    <h2 ng-repeat="d in dash">{{d.message}}</h2>
+                  </div>  <!-- ng-hide section -->
+              </div>
             </div>
-          </div>
-      </div> <!-- End main -->
+        </div> <!-- End main -->
+      
     </div> <!-- end ng-controller -->
-  </div>  <!-- end row -->
+  
      
     
     <%= javascript_include_tag "application" %>

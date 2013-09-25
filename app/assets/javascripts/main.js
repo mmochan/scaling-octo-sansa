@@ -1,4 +1,4 @@
-var app = angular.module('spinner', [] );
+var app = angular.module('spinner', ['ngTable'] );
 
 
 app.factory('myService', function($http) {
@@ -24,27 +24,46 @@ app.factory('Tracker', function($http) {
 app.factory('Dashboard', function($http) {
     return {
         getServices: function() {
-            return $http.get('/dashboards.json').then(function(dash) {
-                    return dash.data;
+            return $http.get('/dashboards.json').then(function(dashmessage) {
+                    return dashmessage.data;
                 });
         }
     }
 });
 
+
+
 var controllers = {}
 
-controllers.SpinnerCtrl = function ($scope, myService, Tracker, Dashboard){
-
+controllers.SpinnerCtrl = function ($scope, myService, Tracker, Dashboard, ngTableParams){
+    
+        var data = myService.getServices();
+     
+        $scope.tableParams = new ngTableParams({
+            page: 1,            // show first page
+            total: data.length, // length of data
+            count: 10           // count per page
+        });
+     
+        // watch for changes of parameters
+        $scope.$watch('tableParams', function(params) {
+            // slice array data on pages
+            $scope.users = data.slice(
+                (params.page - 1) * params.count,
+                params.page * params.count
+            );
+        }, true);
+    
     $scope.reset = function() {
         $scope.myosbs = false;
         $scope.tracker = false;
         $scope.validation = false;
-        $scope.poos =false;
+        $scope.dash =false;
     }
-    $scope.poos = function () {
+    $scope.dashboard = function () {
         $scope.reset();
-        $scope.poos = Dashboard.getServices();
-        return $scope.poos;
+        $scope.dash = Dashboard.getServices();
+        return $scope.dash;
     }    
     $scope.osbservices = function () {
         $scope.reset();
@@ -57,9 +76,12 @@ controllers.SpinnerCtrl = function ($scope, myService, Tracker, Dashboard){
         return $scope.tracker;
     }
     $scope.validation = function () {
-        $scope.reset();
-        $scope.validation = true;
-        return $scope.validation;
+        if ($scope.showme == true) {
+            $scope.showme = false;
+        }
+        else { 
+           $scope.showme = true; 
+        }
     }    
 }
 

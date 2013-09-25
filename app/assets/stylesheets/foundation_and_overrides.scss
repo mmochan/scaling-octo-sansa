@@ -4,6 +4,8 @@
 $include-html-top-bar-classes: $include-html-classes;
 $topbar-bg: #000;
 
+
+
 // Settings file to override Foundation variables
 
 // You can find the variables for each component at the bottom of their
@@ -31,7 +33,7 @@ $topbar-bg: #000;
 // $text-direction: ltr;
 
 // We use these as default colors throughout
-// $primary-color: #2ba6cb;
+$primary-color: #2ba6cb;
 // $secondary-color: #e9e9e9;
 // $alert-color: #c60f13;
 // $success-color: #5da423;
@@ -132,9 +134,9 @@ $row-width: 75em;
 // $code-font-weight: bold;
 
 // We use these to style anchors
-// $anchor-text-decoration: none;
-// $anchor-font-color: $primary-color;
-// $anchor-font-color-hover: darken($primary-color, 5%);
+$anchor-text-decoration: none;
+$anchor-font-color: $primary-color;
+$anchor-font-color-hover: darken($primary-color, 5%);
 
 // We use these to style the <hr> element
 // $hr-border-width: 1px;
@@ -673,21 +675,21 @@ $row-width: 75em;
 //
 
 // We use these to control the background and border styles
-// $panel-bg: darken(#fff, 5%);
-// $panel-border-style: solid;
-// $panel-border-size: 1px;
+$panel-bg: darken(#444444, 5%);
+$panel-border-style: solid;
+$panel-border-size: 1px;
 
 // We use this % to control how much we darken things on hover
-// $panel-function-factor: 10%;
-// $panel-border-color: darken($panel-bg, $panel-function-factor);
+$panel-function-factor: 10%;
+ $panel-border-color: darken($panel-bg, $panel-function-factor);
 
 // We use these to set default inner padding and bottom margin
-// $panel-margin-bottom: emCalc(20px);
-// $panel-padding: emCalc(20px);
+$panel-margin-bottom: emCalc(20px);
+$panel-padding: emCalc(20px);
 
 // We use these to set default font colors
-// $panel-font-color: #333;
-// $panel-font-color-alt: #fff;
+$panel-font-color: #111;
+$panel-font-color-alt: #fff;
 
 //
 // Pricing Table Variables
@@ -796,24 +798,24 @@ $row-width: 75em;
 //
 
 // We use these to set padding and hover factor
-// $section-padding: emCalc(15px);
-// $section-function-factor: 10%;
+$section-padding: emCalc(15px);
+$section-function-factor: 10%;
 
 // These style the titles
-// $section-title-color: #333;
-// $section-title-bg: #efefef;
-// $section-title-bg-active: darken($section-title-bg, $section-function-factor);
-// $section-title-bg-active-tabs: #fff;
+$section-title-color: #333;
+$section-title-bg: #efefef;
+$section-title-bg-active: darken($section-title-bg, $section-function-factor);
+$section-title-bg-active-tabs: #fff;
 
 // Want to control border size, here ya go!
-// $section-border-size: 1px;
-// $section-border-style: solid;
-// $section-border-color: #ccc;
+ $section-border-size: 1px;
+ $section-border-style: solid;
+ $section-border-color: #ccc;
 
 // Control the color of the background and some size options
-// $section-content-bg: #fff;
-// $section-vertical-nav-min-width: emCalc(200px);
-// $section-bottom-margin: emCalc(20px);
+$section-content-bg: #fff;
+$section-vertical-nav-min-width: emCalc(200px);
+$section-bottom-margin: emCalc(20px);
 
 //
 // Side Nav Variables

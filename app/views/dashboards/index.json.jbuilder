@@ -1,2 +1,5 @@
 
-  json.set! :message, 'Welcome to the Dashboard'
+
+json.array! @dashboards do |dash|
+  json.message dash.message
+end
