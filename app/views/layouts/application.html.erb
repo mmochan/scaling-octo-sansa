@@ -27,28 +27,28 @@
      <nav class="top-bar hide-for-small">
         <ul class="title-area">
           <!-- Title Area -->
-          <li class="name" ng-click="dashboard()"><h1><a>Deployment Framework</a></h1></li>        
+          <li class="name" ng-click="dashboard()"><h1><a href="">Deployment Framework</a></h1></li>        
         </ul>
 
         <section class="top-bar-section">
               <!-- Right Nav Section -->
           <ul class="right">
             <li class="divider"></li>
-            <li class="active has-dropdown"><a>Validation</a>
+            <li class="active has-dropdown"><a href="">Validation</a>
               <ul class="dropdown">
-                <li><a>Release</a></li>
+                <li><a href="">Release</a></li>
                 <li class="divider"></li>
-                <li><a>Runtime</a></li>
+                <li><a href="">Runtime</a></li>
               </ul>
             </li>
             <li class="divider"></li>
-            <li ng-click="osbservices()"><a>OSB Services</a></li>
+            <li ng-click="osbservices()"><a href="">OSB Services</a></li>
             <li class="divider"></li>
-            <li ng-click="validationTracker()"><a>Validation Tracker</a></li>
+            <li ng-click="validationTracker()"><a href="">Validation Tracker</a></li>
             <li class="divider"></li>
-            <li ng-click="osbtracker()"><a>Deployment Tracker</a></li>
+            <li ng-click="osbtracker()"><a href="">Deployment Tracker</a></li>
             <li class="divider"></li>
-            <li ng-click="deployment()"><a>Deployment</a></li>
+            <li ng-click="deployment()"><a href="">Deployment</a></li>
           </ul>
         </section>
       </nav>
@@ -56,59 +56,16 @@
 
         <!-- Main -->
         
-          <div class="large-9 columns" >
+          <div class="large-12 columns" >
             <div class="row">
               <div class="large-12 columns">
-                <div ng-show="myosbs" >
-                  <div class='panel  radius'>
-                    <h1>OSB Services</h1>
-                   </div> 
-                  <div class='panel radius'>
-                    
-                    <table ng-table="tableParams" class="table">
-                        <thead>
-                          <tr>
-                            <th width="200">Name</th>
-                            <th width="200">Server</th>
-                            <th width="200">Version</th>
-                            <th width="200">Harvested</th>
-                            <th width="200">Created</th>                    
-                          </tr>
-                      </thead>
-                      <tbody>
-                         <tr ng-repeat="service in myosbs">
-                            <td>{{service.name}}</td>
-                            <td>{{service.server}}</td>
-                            <td>{{service.version}}</td>                
-                            <td>{{service.harvested_at}}</td>     
-                            <td>{{service.created_at}}</td>     
-                          <tr>
-                        </tbody>
-                      </table>
-                    </div> <!-- End Panel -->
-                  </div> <!-- ng-hide section -->
+                <div ng-show="OsbServiceData" >
+                      <div class="gridStyle" ng-grid="OsbGrid"></div>
+                </div> <!-- ng-hide section -->
 
-                <div ng-show="tracker" >
-                  <h1>Deployment Tracker</h1>
-                  <table>
-                      <thead>
-                        <tr>
-                          <th width="200">Config</th>
-                          <th width="200">Server</th>
-                          <th width="200">tag</th>
-                          <th width="200">artifacts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       <tr ng-repeat="track in tracker"> 
-                          <td>{{track.environment_config}}</td>
-                          <td>{{track.server}}</td>
-                          <td>{{track.tag}}</td>                
-                          <td>{{track.artifacts}}</td>     
-                        <tr>
-                      </tbody>
-                    </table>
-                  </div> <!-- ng-hide section -->
+                <div ng-show="OsbTrackerData" >
+                  <div class="gridStyle" ng-grid="TrackerGrid"></div>
+                </div> <!-- ng-hide section -->
 
                   <div ng-show="validation">
                     <h2>{{valid_message}}</h2>

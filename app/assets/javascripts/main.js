@@ -1,79 +1,76 @@
-var app = angular.module('spinner', ['ngTable'] );
+var app = angular.module('spinner', ['ngGrid'] );
 
+app.factory('JsonRequest', function($http) {
 
-app.factory('myService', function($http) {
     return {
-        getServices: function() {
-            return $http.get('/osb_services.json').then(function(result) {
-                    return result.data;
-                });
+        getServices: function(url) {
+            console.log(url)
+            return $http.get(url).then(function(JsonRequestMessage) {
+                return JsonRequestMessage.data;
+            });
         }
     }
 });
-
-app.factory('Tracker', function($http) {
-    return {
-        getServices: function() {
-            return $http.get('/osb_deployment_trackers.json').then(function(tracker) {
-                    return tracker.data;
-                });
-        }
-    }
-});
-
-app.factory('Dashboard', function($http) {
-    return {
-        getServices: function() {
-            return $http.get('/dashboards.json').then(function(dashmessage) {
-                    return dashmessage.data;
-                });
-        }
-    }
-});
-
-
 
 var controllers = {}
 
-controllers.SpinnerCtrl = function ($scope, myService, Tracker, Dashboard, ngTableParams){
-    
-        var data = myService.getServices();
-     
-        $scope.tableParams = new ngTableParams({
-            page: 1,            // show first page
-            total: data.length, // length of data
-            count: 10           // count per page
-        });
-     
-        // watch for changes of parameters
-        $scope.$watch('tableParams', function(params) {
-            // slice array data on pages
-            $scope.users = data.slice(
-                (params.page - 1) * params.count,
-                params.page * params.count
-            );
-        }, true);
-    
+controllers.SpinnerCtrl = function ($scope, JsonRequest){
+    var urls = {}
+    urls = {
+        "OsbTrackerData": "/osb_deployment_trackers.json",
+        "OsbServiceData":  "/osb_services.json",
+        "DashBoardData": "/dashboards.json"
+    }
+
     $scope.reset = function() {
-        $scope.myosbs = false;
-        $scope.tracker = false;
+        $scope.OsbServiceData = false;
+        $scope.OsbTrackerData = false;
         $scope.validation = false;
         $scope.dash =false;
     }
+
+    $scope.OsbGrid = {
+        data: 'OsbServiceData',
+        showGroupPanel: true,
+        enableCellSelection: true,
+        enableRowSelection: true,
+
+        columnDefs: [{field: 'name', displayName: 'Name'},
+            {field: 'server', displayName: 'Server'},
+            {field: 'version', displayName: 'Version'},
+            {field: 'harvested_at', displayName: 'Harvested'},
+            {field: 'created_at', displayName: 'Created'},
+            ]
+    }
+
+    $scope.TrackerGrid = {
+        data: 'OsbTrackerData',
+        showGroupPanel: true,
+        enableCellSelection: true,
+        enableRowSelection: true,
+
+
+        columnDefs: [{field: 'environment', displayName: 'Environment'},
+            {field: 'server', displayName: 'Server'},
+            {field: 'tag', displayName: 'Tag'},
+            {field: 'artifacts', displayName: 'Artifacts'},
+        ]
+    }
+
     $scope.dashboard = function () {
         $scope.reset();
-        $scope.dash = Dashboard.getServices();
+        $scope.dash = JsonRequest.getServices(urls['DashBoardData']);
         return $scope.dash;
     }    
     $scope.osbservices = function () {
         $scope.reset();
-        $scope.myosbs = myService.getServices();
-        return $scope.myosbs;
+        $scope.OsbServiceData = JsonRequest.getServices(urls['OsbServiceData']);
+        return $scope.OsbGrid;
     }
     $scope.osbtracker = function () {
         $scope.reset();
-        $scope.tracker = Tracker.getServices();
-        return $scope.tracker;
+        $scope.OsbTrackerData = JsonRequest.getServices(urls['OsbTrackerData']);
+        return $scope.TrackerGrid;
     }
     $scope.validation = function () {
         if ($scope.showme == true) {
