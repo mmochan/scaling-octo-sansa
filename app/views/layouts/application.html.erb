@@ -27,7 +27,7 @@
      <nav class="top-bar hide-for-small">
         <ul class="title-area">
           <!-- Title Area -->
-          <li class="name" ng-click="dashboard()"><h1><a href="">Deployment Framework</a></h1></li>        
+          <li class="name" ng-click="getData('DashBoardData')"><h1><a href="">Deployment Framework</a></h1></li>        
         </ul>
 
         <section class="top-bar-section">
@@ -48,7 +48,7 @@
             <li class="divider"></li>
             <li ng-click="osbtracker()"><a href="">Deployment Tracker</a></li>
             <li class="divider"></li>
-            <li ng-click="deployment()"><a href="">Deployment</a></li>
+            <li ng-click="getData('DeploymentServiceData')"><a href="">Deployment</a></li>
           </ul>
         </section>
       </nav>
@@ -71,8 +71,8 @@
                     <h2>{{valid_message}}</h2>
                   </div>  <!-- ng-hide section -->
 
-                  <div ng-show="dash" >
-                    <h2 ng-repeat="d in dash">{{d.message}}</h2>
+                  <div ng-show="DashBoardData" >
+                    <h2 ng-repeat="data in DashBoardData">{{data.message}}</h2>
                   </div>  <!-- ng-hide section -->
               </div>
             </div>
