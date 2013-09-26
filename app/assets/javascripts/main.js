@@ -55,9 +55,14 @@ controllers.SpinnerCtrl = function ($scope, JsonRequest){
     }
 
     $scope.getData = function (serviceName) {
-// Working on this bit
-        mykeys = Object.keys(urls));
-        console.log(mykeys);
+        if (Object.keys(urls).indexOf(serviceName)) {
+            console.log(urls[(Object.keys(urls).indexOf(serviceName))])
+            $scope.DeploymentServiceData = JsonRequest.getServices(urls[serviceName])
+        }
+
+        console.log(Object.keys(urls).indexOf("DeploymentServiceData"))
+
+
         $scope[ serviceName ] = JsonRequest.getServices(urls[$scope[serviceName]]);
     }
 
