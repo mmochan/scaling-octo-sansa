@@ -13,18 +13,21 @@ app.factory('JsonRequest', function($http) {
 
 var controllers = {}
 
-controllers.SpinnerCtrl = function ($scope, $location, JsonRequest){
+controllers.GridCtrl = function ($scope) {
+    
+}
+
+controllers.SpinnerCtrl = function ($scope, JsonRequest){
 
     $scope.init = function () {
-      $scope.DashBoardData = JsonRequest.getServices(urls["DashBoardData"])
-
+      $scope.DashBoardData = JsonRequest.getServices(urls["DashBoardData"])   //loads the default DashBoardData page
     };
 
     $scope.category = 'DashBoardData';  // default active tab
 
     $scope.isActive = function (category) {
         //Check if category of a given <li> is equal to the current category
-        return $scope.category === category;
+        return $scope.category === category;                // returns true if they both equal. $scope.category is set in getData()
     }
 
     var urls = {};
@@ -47,6 +50,9 @@ controllers.SpinnerCtrl = function ($scope, $location, JsonRequest){
         $scope.ReleaseValidationData = false;
         $scope.RuntimeValidationData = false;
     }
+
+
+    //Start of Grid definitions
 
     $scope.OsbGrid = {
         data: 'OsbServiceData',
@@ -98,6 +104,9 @@ controllers.SpinnerCtrl = function ($scope, $location, JsonRequest){
             {field: 'component', displayName: 'Component'},
         ]
     }
+
+    //  End of Grid definitions
+
     var namedServiceData = [];
     var idx;
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecc82622-5a05-4d51-b4db-88ee634f4521" name="Default" comment="" />
+    <list default="true" id="ecc82622-5a05-4d51-b4db-88ee634f4521" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/main.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/main.js" />
+    </list>
     <ignored path="spinner.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="ecc82622-5a05-4d51-b4db-88ee634f4521" time="1380237499282" ignored="false" />
@@ -31,7 +33,7 @@
       <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="51" selection-start="3179" selection-end="3179" vertical-scroll-proportion="0.40227705">
+            <state line="14" column="0" selection-start="351" selection-end="351" vertical-scroll-proportion="0.4085603">
               <folding />
             </state>
           </provider>
@@ -40,7 +42,7 @@
       <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="995" selection-end="995" vertical-scroll-proportion="0.0">
+            <state line="17" column="0" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -317,14 +319,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="995" selection-end="995" vertical-scroll-proportion="0.0">
+        <state line="17" column="0" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="51" selection-start="3179" selection-end="3179" vertical-scroll-proportion="0.40227705">
+        <state line="14" column="0" selection-start="351" selection-end="351" vertical-scroll-proportion="0.4085603">
           <folding />
         </state>
       </provider>
