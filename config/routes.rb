@@ -1,11 +1,13 @@
 Spinner::Application.routes.draw do
+  resources :release_validations
+
+  resources :runtime_validations
+
   resources :dashboards
 
   resources :osb_deployment_trackers
 
   resources :osb_services
-
-  resources :foos
 
   resources :homepages
 

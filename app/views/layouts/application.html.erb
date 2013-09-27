@@ -22,63 +22,66 @@
   </head>
 
   <body class="antialiased off-canvas hide-extras">
-  <div ng-controller="SpinnerCtrl" ng-cloak>     
+  <div ng-controller="SpinnerCtrl" ng-cloak ng-init="init()">     
     <!-- Header and Nav -->
      <nav class="top-bar hide-for-small">
-        <ul class="title-area">
-          <!-- Title Area -->
-          <li class="name" ng-click="dashboard('DeploymentServiceData')"><h1><a href="">Deployment Framework</a></h1></li>        
-        </ul>
+      <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name" ng-click="getData('DashBoardData')" ><h1><a href="">Deployment Framework</a></h1></li>        
+      </ul>
 
-        <section class="top-bar-section">
-              <!-- Right Nav Section -->
-          <ul class="right">
-            <li class="divider"></li>
-            <li class="active has-dropdown"><a href="">Validation</a>
-              <ul class="dropdown">
-                <li><a href="">Release</a></li>
-                <li class="divider"></li>
-                <li><a href="">Runtime</a></li>
-              </ul>
-            </li>
-            <li class="divider"></li>
-            <li ng-click="osbservices()"><a href="">OSB Services</a></li>
-            <li class="divider"></li>
-            <li ng-click="validationTracker()"><a href="">Validation Tracker</a></li>
-            <li class="divider"></li>
-            <li ng-click="osbtracker()"><a href="">Deployment Tracker</a></li>
-            <li class="divider"></li>
-            <li ng-click="getData('DeploymentServiceData')"><a href="">Deployment</a></li>
-          </ul>
-        </section>
-      </nav>
+      <section class="top-bar-section">
+            <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="divider"></li>
+          <li  class="has-dropdown" ng-class="{'active' : isActive('Validation')}"><a href="">Validation</a>
+            <ul class="dropdown">
+              <li ng-click="getData('ReleaseValidationData')"  ng-class="{'active' : isActive('ReleaseValidationData')}"><a href="">Release</a></li>
+              <li class="divider"></li>
+              <li ng-click="getData('RuntimeValidationData')" ng-class="{'active' : isActive('RuntimeValidationData')}"><a href="">Runtime</a></li>
+            </ul>
+          </li>
+          <li class="divider"></li>
+          <li ng-click="getData('OsbServiceData')" ng-class="{'active' : isActive('OsbServiceData')}"><a href="">OSB Services</a></li>
+          <li class="divider"></li>
+          <li ng-click="getData('ValidationTracker')" ng-class="{'active' : isActive('ValidationTracker')}" ><a href="">Validation Tracker</a></li>
+          <li class="divider"></li>
+          <li ng-click="getData('OsbTrackerData')" ng-class="{'active' : isActive('OsbTrackerData')}"><a href="">Deployment Tracker</a></li>
+          <li class="divider"></li>
+          <li ng-click="getData('DeploymentServiceData')" ng-class="{'active' : isActive('DeploymentServiceData')}" ><a href="">Deployment</a></li>
+        </ul>
+      </section>
+     </nav>
     <!-- End Header and Nav -->
 
-        <!-- Main -->
-        
-          <div class="large-12 columns" >
-            <div class="row">
-              <div class="large-12 columns">
-                <div ng-show="OsbServiceData" >
-                      <div class="gridStyle" ng-grid="OsbGrid"></div>
-                </div> <!-- ng-hide section -->
+    <!-- Main -->
+    <div class="large-12 columns" >
+      <div class="row">
+        <div class="large-12 columns">
+          <div ng-show="OsbServiceData" >
+                <div class="gridStyle" ng-grid="OsbGrid"></div>
+          </div> <!-- ng-hide section -->
 
-                <div ng-show="OsbTrackerData" >
-                  <div class="gridStyle" ng-grid="TrackerGrid"></div>
-                </div> <!-- ng-hide section -->
+          <div ng-show="OsbTrackerData" >
+            <div class="gridStyle" ng-grid="TrackerGrid"></div>
+          </div> <!-- ng-hide section -->
 
-                  <div ng-show="validation">
-                    <h2>{{valid_message}}</h2>
-                  </div>  <!-- ng-hide section -->
+            <div ng-show="ReleaseValidationData">
+              <div class="gridStyle" ng-grid="ReleaseGrid"></div>
+            </div>  <!-- ng-hide section -->
 
-                  <div ng-show="DashBoardData" >
-                    <h2 ng-repeat="data in DashBoardData">{{data.message}}</h2>
-                  </div>  <!-- ng-hide section -->
-              </div>
-            </div>
-        </div> <!-- End main -->
+            <div ng-show="RuntimeValidationData">
+              <div class="gridStyle" ng-grid="RuntimeGrid"></div>
+            </div>  <!-- ng-hide section -->                  
+
+            <div ng-show="DashBoardData" >
+              <h2 ng-repeat="data in DashBoardData">{{data.message}}</h2>
+            </div>  <!-- ng-hide section -->
+        </div>
+      </div>
+    </div> <!-- End main -->
       
-    </div> <!-- end ng-controller -->
+  </div> <!-- end ng-controller -->
   
      
     

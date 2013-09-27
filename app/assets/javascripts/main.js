@@ -13,20 +13,39 @@ app.factory('JsonRequest', function($http) {
 
 var controllers = {}
 
-controllers.SpinnerCtrl = function ($scope, JsonRequest){
-    var urls = {}
-    urls = { "OsbTrackerData": "/osb_deployment_trackers.json",
+controllers.SpinnerCtrl = function ($scope, $location, JsonRequest){
+
+    $scope.init = function () {
+      $scope.DashBoardData = JsonRequest.getServices(urls["DashBoardData"])
+
+    };
+
+    $scope.category = 'DashBoardData';  // default active tab
+
+    $scope.isActive = function (category) {
+        //Check if category of a given <li> is equal to the current category
+        return $scope.category === category;
+    }
+
+    var urls = {};
+
+    urls = { "somejunk": false,
+        "OsbTrackerData": "/osb_deployment_trackers.json",
         "OsbServiceData":  "/osb_services.json",
         "DashBoardData": "/dashboards.json",
-        "DeploymentServiceData": "/deployment_service_data.json"
+        "DeploymentServiceData": "/deployment_service_data.json",
+        "ReleaseValidationData": "/release_validations.json",
+        "RuntimeValidationData": "/runtime_validations.json"
     }
 
     $scope.reset = function() {
         $scope.OsbServiceData = false;
         $scope.OsbTrackerData = false;
-        $scope.validation = false;
-        $scope.DashBoardData =false;
-        $scope.DeploymentServiceData =false;
+        $scope.ValidationTracker = false;
+        $scope.DashBoardData = false;
+        $scope.DeploymentServiceData = false;
+        $scope.ReleaseValidationData = false;
+        $scope.RuntimeValidationData = false;
     }
 
     $scope.OsbGrid = {
@@ -54,39 +73,45 @@ controllers.SpinnerCtrl = function ($scope, JsonRequest){
         ]
     }
 
+    $scope.ReleaseGrid = {
+        data: 'ReleaseValidationData',
+        showGroupPanel: true,
+        enableCellSelection: true,
+        enableRowSelection: true,
+        columnDefs: [{field: 'server', displayName: 'Server'},
+            {field: 'file', displayName: 'file'},
+            {field: 'error', displayName: 'Error'},
+            {field: 'message', displayName: 'Message'},
+            {field: 'component', displayName: 'Component'},
+        ]
+    }
+
+    $scope.RuntimeGrid = {
+        data: 'RuntimeValidationData',
+        showGroupPanel: true,
+        enableCellSelection: true,
+        enableRowSelection: true,
+        columnDefs: [{field: 'server', displayName: 'Server'},
+            {field: 'file', displayName: 'file'},
+            {field: 'error', displayName: 'Error'},
+            {field: 'message', displayName: 'Message'},
+            {field: 'component', displayName: 'Component'},
+        ]
+    }
+    var namedServiceData = [];
+    var idx;
+
     $scope.getData = function (serviceName) {
-        if (Object.keys(urls).indexOf(serviceName)) {
-            console.log(urls[(Object.keys(urls).indexOf(serviceName))])
-            $scope.DeploymentServiceData = JsonRequest.getServices(urls[serviceName])
+        $scope.category = serviceName;                  // Updates the category for tab active
+        $scope.reset();                                 // Reset the ng-show to false
+        namedServiceData = Object.keys(urls)            // Create an Array of valid serviceNames
+        if ( namedServiceData.indexOf(serviceName)) {   // If the serviceName passed exists
+            idx = namedServiceData.indexOf(serviceName) // Get the index
+            //Use the index to create the name of the $scope.variable and call getServices
+            // This sets one of the ng-show variables to be truthy based on response data being present.
+            $scope[namedServiceData[idx]] = JsonRequest.getServices(urls[namedServiceData[idx]])
         }
-
-        console.log(Object.keys(urls).indexOf("DeploymentServiceData"))
-
-
-        $scope[ serviceName ] = JsonRequest.getServices(urls[$scope[serviceName]]);
     }
-
-    $scope.dashboard = function () {
-        $scope.reset();
-        $scope.DashBoardData = JsonRequest.getServices(urls['DashBoardData']);
-    }    
-    $scope.osbservices = function () {
-        $scope.reset();
-        $scope.OsbServiceData = JsonRequest.getServices(urls['OsbServiceData']);
-    }
-    $scope.osbtracker = function () {
-        $scope.reset();
-        $scope.OsbTrackerData = JsonRequest.getServices(urls['OsbTrackerData']);  // using ng-show to trigger the display
-
-    }
-    $scope.validation = function () {
-        if ($scope.showme == true) {
-            $scope.showme = false;
-        }
-        else { 
-           $scope.showme = true; 
-        }
-    }    
 }
 
 app.controller(controllers);
